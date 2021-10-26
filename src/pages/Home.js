@@ -13,6 +13,13 @@ class Home extends React.Component {
     this.getListCategories = this.getListCategories.bind(this);
   }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  }
+  
   async getProductList() {
     const { query } = this.state;
     const data = await api.getProductsFromCategoryAndQuery('', query);
@@ -21,17 +28,10 @@ class Home extends React.Component {
     });
   }
 
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
   render() {
     const { query, productList } = this.state;
     const { getProductList, handleChange } = this;
-    
+
     return (
       <div>
         <p
