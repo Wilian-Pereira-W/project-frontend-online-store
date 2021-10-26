@@ -22,26 +22,31 @@ class ProductDetails extends React.Component {
       match: { params: { category, id, query } },
     } = this.props;
 
-    const {results} = await api.getProductsFromCategoryAndQuery(category, query);
+    const { results } = await api.getProductsFromCategoryAndQuery(category, query);
     const finalProduct = results.find((product) => product.id === id);
 
     this.setState({ clickedProduct: finalProduct });
   }
+
   render() {
     const { clickedProduct } = this.state;
     return (
-      <p data-testid="product-detail-name">
-        { clickedProduct.title }
-      </p>
+      <div>
+        <h1 data-testid="product-detail-name">
+          { clickedProduct.title }
+        </h1>
+      </div>
     );
   }
 }
 
 ProductDetails.propTypes = {
-  product: PropTypes.shape({
-    category: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    query: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      category: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      query: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 
