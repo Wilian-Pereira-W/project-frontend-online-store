@@ -12,15 +12,7 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    if (!JSON.parse(localStorage.getItem('addProducts'))) {
-      this.setState({
-        isLocalStorageFilled: false,
-      });
-    } else {
-      this.setState({
-        isLocalStorageFilled: true,
-      })
-    }
+    this.checkLocalStorage();
   }
 
   getFromLocalStorage() {
@@ -40,19 +32,29 @@ class Cart extends React.Component {
     }
   }
 
+  checkLocalStorage() {
+    if (!JSON.parse(localStorage.getItem('addProducts'))) {
+      this.setState({
+        isLocalStorageFilled: false,
+      });
+    } else {
+      this.setState({
+        isLocalStorageFilled: true,
+      });
+    }
+  }
+
   render() {
     const emptyMessage = (
       <p data-testid="shopping-cart-empty-message">
-            Seu carrinho está vazio
-          </p>
-    )
+        Seu carrinho está vazio
+      </p>
+    );
 
     return (
-      <>
-        <div>
-        { this.getFromLocalStorage() ?  this.getFromLocalStorage() : emptyMessage }
-        </div>
-      </>
+      <div>
+        { this.getFromLocalStorage() ? this.getFromLocalStorage() : emptyMessage }
+      </div>
     );
   }
 }
