@@ -25,4 +25,5 @@ Card.propTypes = {
     thumbnail: PropTypes.string.isRequired,
   }).isRequired,
 };
+
 export default Card;

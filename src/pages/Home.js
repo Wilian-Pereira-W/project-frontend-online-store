@@ -27,10 +27,9 @@ class Home extends React.Component {
   handleCategorySelect(event) {
     const { id } = event.target;
     const { getProductList } = this;
-    getProductList();
     this.setState({
       currentCategory: id,
-    });
+    }, () => getProductList());
   }
 
   async getProductList() {
@@ -73,16 +72,21 @@ class Home extends React.Component {
               onClick={ getProductList }
             >
               Buscar
-
             </button>
           </form>
         </div>
         <div className="product-list">
           {productList.map((product) => (
-            <Card
+            <Link
               key={ product.id }
-              product={ product }
-            />
+              data-testid="product-detail-link"
+              to={ `ProductDetails/${product.category_id}/${product.id}/${query}` }
+            >
+              <Card
+                product={ product }
+                query={ query }
+              />
+            </Link>
           ))}
         </div>
       </div>
