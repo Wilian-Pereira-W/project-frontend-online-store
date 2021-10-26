@@ -9,10 +9,12 @@ class Home extends React.Component {
     super();
     this.state = {
       query: '',
+      currentCategory: '',
       productList: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.getProductList = this.getProductList.bind(this);
+    this.handleCategorySelect = this.handleCategorySelect.bind(this);
   }
 
   handleChange(event) {
@@ -22,9 +24,18 @@ class Home extends React.Component {
     });
   }
 
+  handleCategorySelect(event) {
+    const { id } = event.target;
+    const { getProductList } = this;
+    getProductList();
+    this.setState({
+      currentCategory: id,
+    });
+  }
+
   async getProductList() {
-    const { query } = this.state;
-    const data = await api.getProductsFromCategoryAndQuery('', query);
+    const { query, currentCategory } = this.state;
+    const data = await api.getProductsFromCategoryAndQuery(currentCategory, query);
     this.setState({
       productList: data.results,
     });
@@ -32,7 +43,7 @@ class Home extends React.Component {
 
   render() {
     const { query, productList } = this.state;
-    const { getProductList, handleChange } = this;
+    const { getProductList, handleCategorySelect, handleChange } = this;
 
     return (
       <div>
@@ -44,7 +55,7 @@ class Home extends React.Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CategoryList />
+        <CategoryList handleCategorySelect={ handleCategorySelect } />
         <div className="search-form">
           <form>
             <label htmlFor="query-input">
