@@ -13,7 +13,7 @@ class Home extends React.Component {
     this.getListCategories = this.getListCategories.bind(this);
   }
 
-  async getListCategories() {
+  async getProductList() {
     const { query } = this.state;
     const data = await api.getProductsFromCategoryAndQuery('', query);
     this.setState({
@@ -21,7 +21,7 @@ class Home extends React.Component {
     });
   }
 
-  handChange(event) {
+  handleChange(event) {
     const { name, value } = event.target;
     this.setState({
       [name]: value,
@@ -30,6 +30,8 @@ class Home extends React.Component {
 
   render() {
     const { query, productList } = this.state;
+    const { getProductList, handleChange } = this;
+    
     return (
       <div>
         <p
@@ -37,30 +39,32 @@ class Home extends React.Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <div>
+        <div className="search-form">
           <form>
             <label htmlFor="query-input">
               <input
                 data-testid="query-input"
                 type="text"
                 value={ query }
-                onChange={ this.handChange }
+                onChange={ handleChange }
                 name="query"
               />
             </label>
             <button
               data-testid="query-button"
               type="button"
-              onClick={ this.getListCategories }
+              onClick={ getProductList }
             >
               Buscar
 
             </button>
           </form>
+        </div>
+        <div className="product-list">
           {productList.map((product) => (
             <Card
               key={ product.id }
-              productList={ product }
+              product={ product }
             />
           ))}
         </div>
