@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
+import CategoryList from '../components/CategoryList';
 import Card from '../components/Card';
 
 class Home extends React.Component {
@@ -43,6 +44,7 @@ class Home extends React.Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <CategoryList />
         <div className="search-form">
           <form>
             <label htmlFor="query-input">
