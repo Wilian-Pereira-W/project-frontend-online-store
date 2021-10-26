@@ -10,6 +10,7 @@ class ProductDetails extends React.Component {
 
     this.state = {
       clickedProduct: {},
+      freeShipping: false,
     };
   }
 
@@ -25,15 +26,19 @@ class ProductDetails extends React.Component {
     const { results } = await api.getProductsFromCategoryAndQuery(category, '');
     const finalProduct = results.find((product) => product.id === id);
 
-    this.setState({ clickedProduct: finalProduct });
+    this.setState({
+      clickedProduct: finalProduct,
+      freeShipping: finalProduct.shipping.free_shipping,
+    });
   }
 
   render() {
-    const { clickedProduct } = this.state;
+    const { clickedProduct, freeShipping } = this.state;
     return (
       <div>
         <h1 data-testid="product-detail-name">
           { clickedProduct.title }
+          { freeShipping && <p data-testid="free-shipping">Frete Grátis!</p> }
         </h1>
       </div>
     );
