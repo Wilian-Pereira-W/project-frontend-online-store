@@ -82,6 +82,7 @@ class Home extends React.Component {
               data-testid="product-detail-link"
               to={ `ProductDetails/${product.category_id}/${product.id}/${query}` }
             >
+              { console.log(product) }
               <Card
                 product={ product }
                 query={ query }
