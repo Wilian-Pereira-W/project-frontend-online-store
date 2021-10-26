@@ -9,11 +9,12 @@ class Card extends React.Component {
   }
 
   setToLocalStorage() {
-    const { product: { title, thumbnail, price } } = this.props;
+    const { product: { title, thumbnail, price, id } } = this.props;
     const putInLocalStorage = {
       title,
       thumbnail,
       price,
+      id,
     };
 
     if (!JSON.parse(localStorage.getItem('addProducts'))) {
@@ -58,6 +59,7 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     key: PropTypes.string.isRequired,
   }).isRequired,
 };
