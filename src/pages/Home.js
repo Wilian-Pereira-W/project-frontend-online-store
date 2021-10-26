@@ -77,17 +77,11 @@ class Home extends React.Component {
         </div>
         <div className="product-list">
           {productList.map((product) => (
-            <Link
+            <Card
               key={ product.id }
-              data-testid="product-detail-link"
-              to={ `ProductDetails/${product.category_id}/${product.id}/${query}` }
-            >
-              { console.log(product) }
-              <Card
-                product={ product }
-                query={ query }
-              />
-            </Link>
+              product={ product }
+              query={ query }
+            />
           ))}
         </div>
       </div>
