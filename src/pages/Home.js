@@ -27,10 +27,9 @@ class Home extends React.Component {
   handleCategorySelect(event) {
     const { id } = event.target;
     const { getProductList } = this;
-    getProductList();
     this.setState({
       currentCategory: id,
-    });
+    }, () => getProductList());
   }
 
   async getProductList() {
@@ -73,7 +72,6 @@ class Home extends React.Component {
               onClick={ getProductList }
             >
               Buscar
-
             </button>
           </form>
         </div>

@@ -19,10 +19,10 @@ class ProductDetails extends React.Component {
 
   async getProduct() {
     const {
-      match: { params: { category, id, query } },
+      match: { params: { category, id } },
     } = this.props;
 
-    const { results } = await api.getProductsFromCategoryAndQuery(category, query);
+    const { results } = await api.getProductsFromCategoryAndQuery(category, '');
     const finalProduct = results.find((product) => product.id === id);
 
     this.setState({ clickedProduct: finalProduct });
@@ -45,7 +45,6 @@ ProductDetails.propTypes = {
     params: PropTypes.shape({
       category: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
-      query: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };
