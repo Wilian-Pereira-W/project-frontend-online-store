@@ -9,6 +9,7 @@ class Cart extends React.Component {
     };
 
     this.getFromLocalStorage = this.getFromLocalStorage.bind(this);
+    this.checkLocalStorage = this.checkLocalStorage.bind(this);
   }
 
   componentDidMount() {
