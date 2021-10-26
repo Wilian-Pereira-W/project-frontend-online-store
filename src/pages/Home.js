@@ -9,8 +9,8 @@ class Home extends React.Component {
       query: '',
       productList: [],
     };
-    this.handChange = this.handChange.bind(this);
-    this.getListCategories = this.getListCategories.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.getProductList = this.getProductList.bind(this);
   }
 
   handleChange(event) {
