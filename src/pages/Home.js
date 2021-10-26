@@ -82,6 +82,7 @@ class Home extends React.Component {
             <Card
               key={ product.id }
               product={ product }
+              query={ query }
             />
           ))}
         </div>
