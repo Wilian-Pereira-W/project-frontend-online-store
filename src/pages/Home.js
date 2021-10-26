@@ -1,6 +1,7 @@
 import React from 'react';
 import * as api from '../services/api';
 import Card from '../components/Card';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   constructor() {
@@ -34,6 +35,9 @@ class Home extends React.Component {
 
     return (
       <div>
+        <Link data-testid="shopping-cart-button" to="/Cart">
+          Carrinho de Compras
+        </Link>
         <p
           data-testid="home-initial-message"
         >
