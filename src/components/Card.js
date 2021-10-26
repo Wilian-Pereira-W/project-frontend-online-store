@@ -78,7 +78,6 @@ Card.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     category_id: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
     shipping: PropTypes.shape({
       free_shipping: PropTypes.bool,
     }),

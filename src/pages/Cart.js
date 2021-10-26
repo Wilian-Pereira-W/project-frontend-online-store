@@ -4,49 +4,54 @@ class Cart extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   isLocalStorageFilled: true,
-    // };
+    this.state = {
+      isLocalStorageFilled: false,
+    };
 
-    // this.toggleLocalStorage = this.toggleLocalStorage.bind(this);
     this.getFromLocalStorage = this.getFromLocalStorage.bind(this);
   }
 
-  // componentDidMount() {
-  //   if (!JSON.parse(localStorage.getItem('addProducts'))) {
-  //     toggleLocalStorage();
-  //   }
-  // }
+  componentDidMount() {
+    if (!JSON.parse(localStorage.getItem('addProducts'))) {
+      this.setState({
+        isLocalStorageFilled: false,
+      });
+    } else {
+      this.setState({
+        isLocalStorageFilled: true,
+      })
+    }
+  }
 
   getFromLocalStorage() {
     const shopCart = JSON.parse(localStorage.getItem('addProducts'));
+    const { isLocalStorageFilled } = this.state;
 
-    const renderizeItems = shopCart.map((item) => (
-      <section key={ item.id } data-testid="product">
-        <h3 data-testid="shopping-cart-product-name">{ item.title }</h3>
-        <img src={ item.thumbnail } alt={ `Imagem: ${item.title}` } />
-        <p>{ item.price }</p>
-        <p data-testid="shopping-cart-product-quantity">1</p>
-      </section>
-    ));
-    return renderizeItems;
+    if (isLocalStorageFilled) {
+      const renderizeItems = shopCart.map((item) => (
+        <section key={ item.id } data-testid="product">
+          <h3 data-testid="shopping-cart-product-name">{ item.title }</h3>
+          <img src={ item.thumbnail } alt={ `Imagem: ${item.title}` } />
+          <p>{ item.price }</p>
+          <p data-testid="shopping-cart-product-quantity">Quantidade: 1</p>
+        </section>
+      ));
+      return renderizeItems;
+    }
   }
 
-  // toggleLocalStorage() {
-  //   this.setState({
-  //     isLocalStorageFilled: false,
-  //   });
-  // }
-
   render() {
+    const emptyMessage = (
+      <p data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
+          </p>
+    )
+
     return (
       <>
         <div>
-          <p data-testid="shopping-cart-empty-message">
-            Seu carrinho está vazio
-          </p>
+        { this.getFromLocalStorage() ?  this.getFromLocalStorage() : emptyMessage }
         </div>
-        { this.getFromLocalStorage() }
       </>
     );
   }
