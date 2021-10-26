@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
-import mockedQueryResult from '../__mocks__/query';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -19,28 +19,30 @@ class ProductDetails extends React.Component {
 
   async getProduct() {
     const {
-      match: {
-        params: {
-          category, query,
-        }
-      }
+      match: { params: { category, id, query } },
     } = this.props;
 
-    // const {results} = await api.getProductsFromCategoryAndQuery(category, query);
-    const {results} = mockedQueryResult;
-    console.log(results);
-    const id = 'MLB923744806';
-    const matching = results.find((product) => product.id === id);
-    console.log(matching)
+    const {results} = await api.getProductsFromCategoryAndQuery(category, query);
+    const finalProduct = results.find((product) => product.id === id);
 
-    this.setState({ clickedProduct: matching });
+    this.setState({ clickedProduct: finalProduct });
   }
   render() {
-    const {
-      match: { params: { category, id, query } } 
-    } = this.props;
     const { clickedProduct } = this.state;
-    return <p data-testid="product-detail-name">{ clickedProduct.title }</p>;
+    return (
+      <p data-testid="product-detail-name">
+        { clickedProduct.title }
+      </p>
+    );
   }
 }
+
+ProductDetails.propTypes = {
+  product: PropTypes.shape({
+    category: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    query: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 export default ProductDetails;
