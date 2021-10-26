@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
+import EvaluationForm from '../components/EvaluationForm';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -40,6 +41,7 @@ class ProductDetails extends React.Component {
           { clickedProduct.title }
           { freeShipping && <p data-testid="free-shipping">Frete Grátis!</p> }
         </h1>
+        <EvaluationForm />
       </div>
     );
   }
