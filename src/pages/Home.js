@@ -19,7 +19,7 @@ class Home extends React.Component {
       [name]: value,
     });
   }
-  
+
   async getProductList() {
     const { query } = this.state;
     const data = await api.getProductsFromCategoryAndQuery('', query);
