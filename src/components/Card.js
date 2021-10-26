@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Card extends React.Component {
   render() {
-    const { productList: {
+    const { product: {
       title,
       price,
       thumbnail,
@@ -19,7 +19,7 @@ class Card extends React.Component {
 }
 
 Card.propTypes = {
-  productList: PropTypes.shape({
+  product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
