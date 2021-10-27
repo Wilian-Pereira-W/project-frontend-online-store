@@ -32,8 +32,8 @@ class Card extends React.Component {
       title,
       price,
       thumbnail,
+      id,
       shipping,
-      key,
     }, product } = this.props;
     const freeShipping = shipping.free_shipping;
 
@@ -52,7 +52,7 @@ class Card extends React.Component {
           </div>
         </Link>
         <button
-          id={ key }
+          id={ id }
           type="button"
           data-testid="product-add-to-cart"
           onClick={ this.setToLocalStorage }
@@ -69,6 +69,7 @@ Card.defaultProp = {
   shipping: {
     freeShipping: false,
   },
+  key: '',
 };
 
 Card.propTypes = {
@@ -78,7 +79,7 @@ Card.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     category_id: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    key: PropTypes.string,
     shipping: PropTypes.shape({
       free_shipping: PropTypes.bool,
     }),
