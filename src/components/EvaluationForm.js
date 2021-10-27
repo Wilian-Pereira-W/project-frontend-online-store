@@ -22,7 +22,6 @@ class EvaluationForm extends React.Component {
 
   handleClick(event) {
     const value = parseInt(event.target.value, 10);
-    console.log(value);
     this.setState({
       evaluation: value,
     });

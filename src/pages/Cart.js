@@ -1,4 +1,5 @@
 import React from 'react';
+import * as cartStorage from '../services/cartStorage';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -10,6 +11,8 @@ class Cart extends React.Component {
 
     this.getFromLocalStorage = this.getFromLocalStorage.bind(this);
     this.checkLocalStorage = this.checkLocalStorage.bind(this);
+    this.increase = this.increase.bind(this);
+    this.decrease = this.decrease.bind(this);
   }
 
   componentDidMount() {
@@ -26,7 +29,29 @@ class Cart extends React.Component {
           <h3 data-testid="shopping-cart-product-name">{ item.title }</h3>
           <img src={ item.thumbnail } alt={ `Imagem: ${item.title}` } />
           <p>{ item.price }</p>
-          <p data-testid="shopping-cart-product-quantity">Quantidade: 1</p>
+          <p
+            data-testid="shopping-cart-product-quantity"
+          >
+            Quantidade:
+            {' '}
+            { item.quantity }
+          </p>
+          <div>
+            <button
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ () => this.increase(item) }
+            >
+              +
+            </button>
+            <button
+              type="button"
+              data-testid="product-decrease-quantity"
+              onClick={ () => this.decrease(item) }
+            >
+              -
+            </button>
+          </div>
         </section>
       ));
       return renderizeItems;
@@ -43,6 +68,16 @@ class Cart extends React.Component {
         isLocalStorageFilled: true,
       });
     }
+  }
+
+  increase(product) {
+    cartStorage.increaseQuantity(product);
+    this.checkLocalStorage();
+  }
+
+  decrease(product) {
+    cartStorage.reduceQuantity(product);
+    this.checkLocalStorage();
   }
 
   render() {

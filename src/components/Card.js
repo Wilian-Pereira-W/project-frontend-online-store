@@ -1,32 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import setToLocalStorage from '../services/cartStorage';
 
 class Card extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.setToLocalStorage = this.setToLocalStorage.bind(this);
-  }
-
-  setToLocalStorage() {
-    const { product: { title, thumbnail, price, id } } = this.props;
-    const putInLocalStorage = {
-      title,
-      thumbnail,
-      price,
-      id,
-    };
-
-    if (!JSON.parse(localStorage.getItem('addProducts'))) {
-      localStorage.setItem('addProducts', JSON.stringify([putInLocalStorage]));
-    } else {
-      const recoveredFromLocal = JSON.parse(localStorage.getItem('addProducts'));
-      recoveredFromLocal.push(putInLocalStorage);
-      localStorage.setItem('addProducts', JSON.stringify(recoveredFromLocal));
-    }
-  }
-
   render() {
     const { product: {
       title,
@@ -55,7 +32,7 @@ class Card extends React.Component {
           id={ id }
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ this.setToLocalStorage }
+          onClick={ () => setToLocalStorage(product) }
         >
           Adicionar ao Carrinho
         </button>
